@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
 import { User, Lock } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
+    const { login } = useAuth();
     const [tenant, setTenant] = useState(null); // 'melmo' or 'tearaja'
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -26,12 +27,10 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await api.post('/auth/signin', { username, password });
-            localStorage.setItem('token', response.data.accessToken);
-            localStorage.setItem('user', JSON.stringify(response.data));
+            await login({ username, password });
             navigate('/');
         } catch (err) {
-            setError('Invalid username or password');
+            setError(err.response?.data?.message || 'Invalid username or password');
         }
     };
 
