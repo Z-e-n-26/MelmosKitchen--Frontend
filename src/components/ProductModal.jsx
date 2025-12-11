@@ -62,7 +62,7 @@ const ProductModal = ({ product, categoryId, onClose, onSuccess }) => {
                             <label className="block text-sm text-gray-600 mb-1 font-medium">Opening Stock</label>
                             <input
                                 type="number"
-                                step="0.01"
+                                step="1"
                                 required
                                 className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-gray-900 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all"
                                 value={openingStock}
